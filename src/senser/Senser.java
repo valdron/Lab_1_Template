@@ -13,7 +13,7 @@ public class Senser extends Observable implements Runnable
 	private String getSentence()
 	{
 		//TODO: Define an regular expression to read in only relevant sentences
-		String filter = "\\{.*[0-9]{10}\\.[0-9]{7}!ADS-B\\*[0-9][A-F]{28}.*\\}";
+		String filter = "[0-9]{10}\\.[0-9]{7}!ADS-B\\*[0-9A-F]{28}";
 		// to find . or * you must use \\. or \\*;
 
 		return client.readChunk(filter);

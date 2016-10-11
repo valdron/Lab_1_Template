@@ -51,14 +51,14 @@ public class StreamingWebClient {
     } // readln
 
     public String readChunk ( String filter ) {
-	String  chunk = "";
-	Pattern pattern = Pattern.compile ( filter );
-	Matcher matcher;
-	do { 
-	    chunk = chunk + (char) read().byteValue();
-	    matcher = pattern.matcher ( chunk );
-	} while ( ! matcher.find() ); 
-	return matcher.group();
+		String  chunk = "";
+		Pattern pattern = Pattern.compile ( filter );
+		Matcher matcher;
+		do {
+	    	chunk = chunk + (char) read().byteValue();
+	    	matcher = pattern.matcher ( chunk );
+		} while ( ! matcher.find() );
+		return matcher.group();
     }
 
     public void finalize () {

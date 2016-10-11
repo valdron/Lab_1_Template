@@ -1,4 +1,5 @@
 package senser;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringJoiner;
@@ -6,11 +7,11 @@ import java.util.StringJoiner;
 public class ADSBSentence implements ADSBSentenceInterface
 {
 	//TODO: Create relevant fields
-	String timestamp;
-	String dfca;
-	String icao;
-	String payload;
-	String parity;
+	private String timestamp;
+	private String dfca;
+	private String icao;
+	private String payload;
+	private String parity;
 
 	public ADSBSentence(String timestamp, String dfca, String icao, String payload, String parity)
 	{
@@ -76,9 +77,9 @@ public class ADSBSentence implements ADSBSentenceInterface
 		String[] times = this.getTimestamp().split("\\."); 
 		
 		//TODO: Define date format
-		SimpleDateFormat dateFormat = new SimpleDateFormat("EE, DD.MM.YY h:m:s");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("EE, dd.MM.YYYY hh:mm:ss");
 		//TODO: Create a DAte object
-		Date date = new Date(times[0]);
+		Date date = new Date(Long.parseLong(times[0]) * 1000);
 		//Create time string
 		String time = dateFormat.format(date) + "." + times[1];
 		
