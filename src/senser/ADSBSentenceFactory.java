@@ -6,8 +6,7 @@ public class ADSBSentenceFactory implements ADSBSentenceFactoryInterface
 	@Override
 	public ADSBSentence fromWebdisJson(String json)
 	{		
-		//TODO: Get distinct values from the json string
-		
+		//decompose Sentence in subparts
 		String timestamp = json.substring(0, 18);									
 		String dfca 	 = json.substring(25, 27);					
 		String icao 	 = json.substring(27, 33);			

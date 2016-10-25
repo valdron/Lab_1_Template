@@ -12,9 +12,8 @@ public class Senser extends Observable implements Runnable
 
 	private String getSentence()
 	{
-		//TODO: Define an regular expression to read in only relevant sentences 
 		String filter = "\\d{10}\\.\\d{7}!ADS-B\\*[A-F0-9]{28}";
-		// to find . or * you must use \\. or \\*;
+		// 10 numbers . 7 numers '!ADSB*' 28 Hexnumbers
 		
 		return client.readChunk(filter);
 	}
@@ -22,8 +21,8 @@ public class Senser extends Observable implements Runnable
 	public void run()
 	{
 		ADSBSentence sentence;
-		
-		//TODO: Create factory and display object 
+
+		// Creating factory and display
 		ADSBSentenceFactory factory = new ADSBSentenceFactory();
 		ADSBSentenceDisplay display = new ADSBSentenceDisplay();
 		
