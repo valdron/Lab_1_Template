@@ -16,12 +16,12 @@ public class StreamingWebClient {
     private BufferedInputStream bis;
    
     public StreamingWebClient ( String webResource, int expectedBufferSize ) {
-		url  = webResource;
-		size = expectedBufferSize;
-		// realization of the observable pattern via queue
-		q = new LinkedBlockingQueue<Byte>();
-		byte [] buffer = new byte [size];
-		System.err.println ( this.getClass().getName() + ": Connecting to " + url + "..." );
+	url  = webResource;
+	size = expectedBufferSize; 
+	// realization of the observable pattern via queue
+	q = new LinkedBlockingQueue<Byte>(); 
+	byte [] buffer = new byte [size];
+	System.err.println ( this.getClass().getName() + ": Connecting to " + url + "..." );
 	// make a producer thread that fills a queue
 	Runnable producer = new Runnable() { 
 		public void run () {
@@ -51,14 +51,14 @@ public class StreamingWebClient {
     } // readln
 
     public String readChunk ( String filter ) {
-		String  chunk = "";
-		Pattern pattern = Pattern.compile ( filter );
-		Matcher matcher;
-		do {
-	    	chunk = chunk + (char) read().byteValue();
-	    	matcher = pattern.matcher ( chunk );
-		} while ( ! matcher.find() );
-		return matcher.group();
+	String  chunk = "";
+	Pattern pattern = Pattern.compile ( filter );
+	Matcher matcher;
+	do { 
+	    chunk = chunk + (char) read().byteValue();
+	    matcher = pattern.matcher ( chunk );
+	} while ( ! matcher.find() ); 
+	return matcher.group();
     }
 
     public void finalize () {
