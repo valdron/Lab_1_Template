@@ -15,12 +15,6 @@ public class ADSBSentence implements ADSBSentenceInterface {
 		this.parity = parity;
 	}
 
-
-	public String getDfca() {
-		return dfca;
-	}
-
-
 	// Overwrite toString() method to print our relevant fields
 	@Override
 	public String toString() {
@@ -42,6 +36,10 @@ public class ADSBSentence implements ADSBSentenceInterface {
 	}
 
 //Getters and Setters
+	public String getDfca() {
+	return dfca;
+}
+
 	public void setDfca(String dfca) {
 		this.dfca = dfca;
 	}
