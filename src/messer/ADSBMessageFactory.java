@@ -45,4 +45,14 @@ public class ADSBMessageFactory implements ADSBMessageFactoryInterface {
         BigInteger c = new BigInteger(hex_string,16);
         return c.toString(2);
     }
+    public static String frombinary6bitString(String str){
+        String result = "";
+        for(int i = 0; i < str.length();i+=6) {
+            int charvalue = Integer.parseInt(str.substring(i,i+6),2);
+            if(charvalue < 32)
+                charvalue += 64;
+            result += (char) charvalue;
+        }
+        return result;
+    }
 }
