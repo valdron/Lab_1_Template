@@ -5,6 +5,14 @@ package messer;
  */
 public class ADSBAirboneVelocityMessage extends ADSBMessage implements ADSBAirboneVelocityMessageInterface{
 
+    private int subType,
+                intentChange,
+                reserveredA,
+                navigationAccuracy,
+                speed,
+                heading,
+                verticalRateSource,
+                verticalSpeed;
 
     public ADSBAirboneVelocityMessage(String icao, int type_int, int df_int, int ca_int, String payload, String timestamp) {
         super(icao, type_int, df_int, ca_int, payload, timestamp);
@@ -13,41 +21,41 @@ public class ADSBAirboneVelocityMessage extends ADSBMessage implements ADSBAirbo
     //TODO implement Interface;
     @Override
     public int getSubtype() {
-        return 0;
+        return subType;
     }
 
     @Override
     public int getIntentChange() {
-        return 0;
+        return intentChange;
     }
 
     @Override
     public int getReservedA() {
-        return 0;
+        return reserveredA;
     }
 
     @Override
     public int getNavigationAccuracy() {
-        return 0;
+        return navigationAccuracy;
     }
 
     @Override
     public int getSpeed() {
-        return 0;
+        return speed;
     }
 
     @Override
     public int getHeading() {
-        return 0;
+        return heading;
     }
 
     @Override
     public int getVerticalRateSource() {
-        return 0;
+        return verticalRateSource;
     }
 
     @Override
     public int getVerticalSpeed() {
-        return 0;
+        return verticalSpeed;
     }
 }
