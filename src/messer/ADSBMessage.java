@@ -5,10 +5,18 @@ package messer;
  */
 public class ADSBMessage implements ADSBMessageInterface {
 
-    //TODO implement interface
-    @Override
-    public ADSBMessage Constructor(String icao, String type, String df, String payload) {
-        return null;
+    private String icao;
+    private String payload;
+    private String timestamp;
+    private int type, df, ca;
+
+    public ADSBMessage (String icao, int type, int df, int ca, String payload, String timestamp) {
+        this.icao = icao;
+        this.type = type;
+        this.df = df;
+        this.ca = ca;
+        this.payload = payload;
+        this.timestamp = timestamp;
     }
 
     @Override

@@ -5,40 +5,18 @@ package messer;
  */
 public class ADSBAircraftIdentificationMessage extends ADSBMessage implements ADSBAircraftIdentificationMessageInterface {
 
+    public ADSBAircraftIdentificationMessage(String icao, int type_int, int df_int, int ca_int, String payload, String timestamp) {
+        super(icao, type_int, df_int, ca_int, payload, timestamp);
+    }
 
-    //TODO: implement methods
+    //TODO: Implement interface
     @Override
-    public int getSurveillanceStatus() {
+    public int getEmitterCategory() {
         return 0;
     }
 
     @Override
-    public int getNiceSupplement() {
-        return 0;
-    }
-
-    @Override
-    public int getAltitude() {
-        return 0;
-    }
-
-    @Override
-    public int getTimeFlag() {
-        return 0;
-    }
-
-    @Override
-    public int getCprFormat() {
-        return 0;
-    }
-
-    @Override
-    public int getCprLongtitude() {
-        return 0;
-    }
-
-    @Override
-    public int getCprLatitude() {
+    public int getAircraftId() {
         return 0;
     }
 }

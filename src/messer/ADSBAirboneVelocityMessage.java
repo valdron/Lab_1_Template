@@ -6,6 +6,10 @@ package messer;
 public class ADSBAirboneVelocityMessage extends ADSBMessage implements ADSBAirboneVelocityMessageInterface{
 
 
+    public ADSBAirboneVelocityMessage(String icao, int type_int, int df_int, int ca_int, String payload, String timestamp) {
+        super(icao, type_int, df_int, ca_int, payload, timestamp);
+    }
+
     //TODO implement Interface;
     @Override
     public int getSubtype() {

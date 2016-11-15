@@ -1,7 +1,10 @@
 package client;
+import java.math.BigInteger;
 import java.util.Observable;
 import java.util.Observer;
 
+import messer.ADSBMessage;
+import messer.ADSBMessageFactory;
 import senser.ADSBSentence;
 import senser.ADSBSentenceDisplay;
 import senser.Queue;
@@ -25,9 +28,10 @@ public class Client extends Thread implements Observer
 	public void run()
 	{ 
 		ADSBSentenceDisplay display = new ADSBSentenceDisplay();
+		ADSBMessageFactory messageFactory = new ADSBMessageFactory();
 		while(true)
 		{
-			display.display(queue.poll());
+			ADSBMessage message = messageFactory.fromADSBSentence(queue.poll());
 		}
 	}
 }
