@@ -5,8 +5,8 @@ package messer;
  */
 public class ADSBAircraftIdentificationMessage extends ADSBMessage implements ADSBAircraftIdentificationMessageInterface {
 
-    private int emitterCategory,
     private String aircraftId;
+    private int emitterCategory;
 
     public ADSBAircraftIdentificationMessage(String icao, int type_int, int df_int, int ca_int, String payload, String timestamp) {
         super(icao, type_int, df_int, ca_int, payload, timestamp);
@@ -15,8 +15,14 @@ public class ADSBAircraftIdentificationMessage extends ADSBMessage implements AD
         emitterCategory = Integer.parseInt(payload_binary.substring(5,8),2);
         aircraftId = payload.substring(8,56);
     }
+    @Override
+    public String toString() {
+        return getIcao() + "\tAircraft Identification and Category Message \n" +
+                "\t\tIdent:\t " + aircraftId + "\n" +
+                "\t\tCateg:\t " + emitterCategory + "\n";
 
-    //TODO: Implement interface
+    }
+
     @Override
     public int getEmitterCategory() {
         return emitterCategory;

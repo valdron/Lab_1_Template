@@ -31,7 +31,7 @@ public class ADSBAirbonePositionMessage extends ADSBMessage implements ADSBAirbo
             format = "Even";
         else
             format = "Odd";
-        return getIcao() + "Airborne Position Message \n" +
+        return getIcao() + "\tAirborne Position Message \n" +
                 "\t\tType:\t " + getType() + "\n" +
                 "\t\tAlti:\t " + altitude + "\n" +
                 "\t\tLatlon:\t " + cprLatitude + " : " + cprLongtitude  + "\n" +

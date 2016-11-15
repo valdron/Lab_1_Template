@@ -18,7 +18,14 @@ public class ADSBAirboneVelocityMessage extends ADSBMessage implements ADSBAirbo
         super(icao, type_int, df_int, ca_int, payload, timestamp);
     }
 
-    //TODO implement Interface;
+    @Override
+    public String toString() {
+        return getIcao() + "\tAirborne Velocity Message \n" +
+                "\t\tSpeed:\t" + speed + "\n" +
+                "\t\tHeadng:\t" + heading + "\n" +
+                "\t\tVertic:\t" + verticalSpeed + "\n";
+    }
+
     @Override
     public int getSubtype() {
         return subType;
