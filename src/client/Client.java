@@ -6,7 +6,7 @@ import java.util.Observer;
 import messer.ADSBMessage;
 import messer.ADSBMessageFactory;
 import senser.ADSBSentence;
-import senser.ADSBSentenceDisplay;
+import messer.ADSBMessageDisplay;
 import senser.Queue;
 
 
@@ -27,11 +27,12 @@ public class Client extends Thread implements Observer
 
 	public void run()
 	{ 
-		ADSBSentenceDisplay display = new ADSBSentenceDisplay();
+		ADSBMessageDisplay messageDisplay = new ADSBMessageDisplay();
 		ADSBMessageFactory messageFactory = new ADSBMessageFactory();
 		while(true)
 		{
 			ADSBMessage message = messageFactory.fromADSBSentence(queue.poll());
+			messageDisplay.display(message);
 		}
 	}
 }

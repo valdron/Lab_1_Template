@@ -8,6 +8,6 @@ public class ADSBMessageDisplay implements ADSBMessageDisplayInterface{
     //TODO implement interface
     @Override
     public void display(ADSBMessage message) {
-
+        System.out.println(message);
     }
 }

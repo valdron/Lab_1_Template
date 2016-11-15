@@ -23,7 +23,7 @@ public class ADSBMessageFactory implements ADSBMessageFactoryInterface {
         if(type_int < 5 && type_int > 0)
         {
             message = new ADSBAirbonePositionMessage(sentence.getIcao(), type_int, df_int, ca_int, sentence.getPayload(), sentence.getTimestamp());
-
+            System.out.println("HIER BIN ICH");
         }
 
         else if(type_int == 19 && (sub_type_int <= 4 || sub_type_int >= 1)){
@@ -41,7 +41,7 @@ public class ADSBMessageFactory implements ADSBMessageFactoryInterface {
         return message;
     }
 
-    private String hexToBinaryString(String hex_string){
+    public static String hexToBinaryString(String hex_string){
         BigInteger c = new BigInteger(hex_string,16);
         return c.toString(2);
     }

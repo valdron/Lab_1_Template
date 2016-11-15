@@ -16,7 +16,7 @@ public class ADSBAircraftIdentificationMessage extends ADSBMessage implements AD
     }
 
     @Override
-    public int getAircraftId() {
-        return 0;
+    public String getAircraftId() {
+        return "";
     }
 }

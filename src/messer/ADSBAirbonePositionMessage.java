@@ -14,6 +14,28 @@ public class ADSBAirbonePositionMessage extends ADSBMessage implements ADSBAirbo
 
     public ADSBAirbonePositionMessage(String icao, int type_int, int df_int, int ca_int, String payload, String timestamp) {
         super(icao, type_int, df_int, ca_int, payload, timestamp);
+        String payload_binary = ADSBMessageFactory.hexToBinaryString(payload);
+        surveillanceStatus = Integer.parseInt(payload_binary.substring(5,7),2);
+        niceSupplement = Integer.parseInt(payload_binary.substring(7,8),2);
+        altitude = Integer.parseInt(payload_binary.substring(8,20),2);
+        timeFlag = Integer.parseInt(payload_binary.substring(20,21),2);
+        cprFormat = Integer.parseInt(payload_binary.substring(21,22),2);
+        cprLatitude = Integer.parseInt(payload_binary.substring(22,39),2);
+        cprLongtitude = Integer.parseInt(payload_binary.substring(39,56),2);
+    }
+
+    @Override
+    public String toString(){
+        String format;
+        if(cprFormat == 0)
+            format = "Even";
+        else
+            format = "Odd";
+        return getIcao() + "Airborne Position Message \n" +
+                "\t\tType:\t " + getType() + "\n" +
+                "\t\tAlti:\t " + altitude + "\n" +
+                "\t\tLatlon:\t " + cprLatitude + " : " + cprLongtitude  + "\n" +
+                "\t\tFormat:\t " + format + "\n" ;
     }
 
     //TODO: implement methods
