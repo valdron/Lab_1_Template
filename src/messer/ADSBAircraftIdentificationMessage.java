@@ -12,7 +12,7 @@ public class ADSBAircraftIdentificationMessage extends ADSBMessage implements AD
         // get payload as binary string
         String payload_binary = ADSBMessageFactory.hexToBinaryString(payload);
 
-        String aircraftId_binary = payload_binary.substring(8,56);
+        String aircraftId_binary = payload_binary.substring(8);
         emitterCategory = Integer.parseInt(payload_binary.substring(5,8),2);
         // get corresponding JavaString from 6bit char string binary
         aircraftId = ADSBMessageFactory.frombinary6bitString(aircraftId_binary);

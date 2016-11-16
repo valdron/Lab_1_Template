@@ -21,26 +21,26 @@ public class ADSBMessage implements ADSBMessageInterface {
 
     @Override
     public String getTimestamp() {
-        return null;
+        return timestamp;
     }
 
     @Override
     public int getType() {
-        return 0;
+        return type;
     }
 
     @Override
     public String getIcao() {
-        return null;
+        return icao;
     }
 
     @Override
     public int getDownlinkFormat() {
-        return 0;
+        return df;
     }
 
     @Override
     public int getCapability() {
-        return 0;
+        return ca;
     }
 }
