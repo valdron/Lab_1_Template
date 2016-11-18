@@ -20,6 +20,12 @@ public class ADSBMessage implements ADSBMessageInterface {
     }
 
     @Override
+    public String toString() {
+        return getIcao() + "\tOther Message \n" +
+                "\t\tType:\t " + getType() + "\n";
+    }
+
+    @Override
     public String getTimestamp() {
         return timestamp;
     }

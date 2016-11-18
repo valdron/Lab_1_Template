@@ -32,8 +32,6 @@ public class ADSBAirboneVelocityMessage extends ADSBMessage implements ADSBAirbo
         if(verticalRateSign == 1)
             verticalSpeed *= -1;
 
-        //
-
         if(subType <= 2) { // east-west and north-south velocity
             int east_west_speed_nr  = Integer.parseInt(payload_binary.substring(14,24),2);
             int north_south_speed_nr = Integer.parseInt(payload_binary.substring(25,35),2);
@@ -42,23 +40,27 @@ public class ADSBAirboneVelocityMessage extends ADSBMessage implements ADSBAirbo
                 east_west_speed_nr--;
             if (north_south_speed_nr !=0)
                 north_south_speed_nr--;
-            //compute speed with pythagoras
+
+            //  compute speed with pythagoras +1 to match other coding
             speed = (int) Math.sqrt(east_west_speed_nr * east_west_speed_nr + north_south_speed_nr * north_south_speed_nr) + 1;
 
-            double heading_degree = Math.atan(((float) east_west_speed_nr)/north_south_speed_nr);
+            double heading_radians= Math.atan(((float) east_west_speed_nr)/north_south_speed_nr);
 
             int east_or_west = Integer.parseInt(payload_binary.substring(13,14),2);
             if(east_or_west == 1 && north_south_speed_nr == 1)
-                heading = (int) Math.toDegrees(heading_degree + Math.PI)* 360 / 1024;
+                heading = (int) Math.toDegrees(heading_radians + Math.PI)* 360 / 1024;
             else if(east_or_west == 0 && north_south_speed_nr == 1)
-                heading = (int) Math.toDegrees(Math.PI - heading_degree) * 360 / 1024;
+                heading = (int) Math.toDegrees(Math.PI - heading_radians) * 360 / 1024;
             else if (east_or_west == 1 && north_south_speed_nr == 0)
-                heading = (int) Math.toDegrees(2 * Math.PI - heading_degree) * 360 / 1024;
+                heading = (int) Math.toDegrees(2 * Math.PI - heading_radians) * 360 / 1024;
             else
-                heading = (int) Math.toDegrees(heading_degree) * 360 / 1024;
+                heading = (int) Math.toDegrees(heading_radians) * 360 / 1024;
 
-        } else { // with heading
+        } else { // with heading 0 = 0° (north) 1 = 360/1024 ° ... 1023 * 360 / 1024
+
             int heading_status_bit = Integer.parseInt(payload_binary.substring(13,14),2);
+            
+            //check if heading data is available
             if(heading_status_bit == 1){
                 heading = Integer.parseInt(payload_binary.substring(14,24),2);
             }
