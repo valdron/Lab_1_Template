@@ -24,7 +24,7 @@ public class ADSBAirbonePositionMessage extends ADSBMessage implements ADSBAirbo
         timeFlag = Integer.parseInt(payload_binary.substring(20,21),2); // bit 20
         cprFormat = Integer.parseInt(payload_binary.substring(21,22),2); // bit 21
         cprLatitude = Integer.parseInt(payload_binary.substring(22,39),2); // bit 22 .. 38
-        cprLongtitude = Integer.parseInt(payload_binary.substring(39,56),2); // bit 39 ..55
+        cprLongtitude = Integer.parseInt(payload_binary.substring(39),2); // bit 39 ..55
     }
 
     @Override

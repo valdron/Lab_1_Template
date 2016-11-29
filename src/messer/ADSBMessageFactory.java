@@ -20,7 +20,7 @@ public class ADSBMessageFactory implements ADSBMessageFactoryInterface {
         ADSBMessage message;
         if(type_int < 5 && type_int > 0)
         {
-            message = new ADSBAirbonePositionMessage(sentence.getIcao(), type_int, df_int, ca_int, sentence.getPayload(), sentence.getTimestamp());
+            message = new ADSBAircraftIdentificationMessage(sentence.getIcao(), type_int, df_int, ca_int, sentence.getPayload(), sentence.getTimestamp());
         }
 
         else if(type_int == 19 && (sub_type_int <= 4 || sub_type_int >= 1)){
@@ -28,7 +28,7 @@ public class ADSBMessageFactory implements ADSBMessageFactoryInterface {
         }
 
         else if((type_int <= 22 && type_int >= 20) || (type_int <= 18 && type_int >= 9) || type_int == 0){
-            message = new ADSBAircraftIdentificationMessage(sentence.getIcao(), type_int, df_int, ca_int, sentence.getPayload(), sentence.getTimestamp());
+            message = new ADSBAirbonePositionMessage(sentence.getIcao(), type_int, df_int, ca_int, sentence.getPayload(), sentence.getTimestamp());
         }
 
         else {
