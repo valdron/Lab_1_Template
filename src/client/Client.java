@@ -3,6 +3,7 @@ import java.math.BigInteger;
 import java.util.Observable;
 import java.util.Observer;
 
+import acamo.Gui;
 import messer.ADSBMessage;
 import messer.ADSBMessageFactory;
 import senser.ADSBSentence;
@@ -29,10 +30,12 @@ public class Client extends Thread implements Observer
 	{ 
 		ADSBMessageDisplay messageDisplay = new ADSBMessageDisplay();
 		ADSBMessageFactory messageFactory = new ADSBMessageFactory();
+		Gui gui = new Gui();
 		while(true)
 		{
 			ADSBMessage message = messageFactory.fromADSBSentence(queue.poll());
 			messageDisplay.display(message);
+			gui.selectMessage(message);
 		}
 	}
 }
