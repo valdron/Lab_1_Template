@@ -20,11 +20,16 @@ public class ADSBAirbonePositionMessage extends ADSBMessage implements ADSBAirbo
         // Split Binary String and parse to Integers
         surveillanceStatus = Integer.parseInt(payload_binary.substring(5,7),2); // bit 5 .. 6
         niceSupplement = Integer.parseInt(payload_binary.substring(7,8),2); // bit 7
-        altitude = Integer.parseInt(payload_binary.substring(8,20),2); // bit 8 .. 19
+        altitude = Integer.parseInt(payload_binary.substring(8,15) + payload_binary.substring(16,20),2);
         timeFlag = Integer.parseInt(payload_binary.substring(20,21),2); // bit 20
         cprFormat = Integer.parseInt(payload_binary.substring(21,22),2); // bit 21
         cprLatitude = Integer.parseInt(payload_binary.substring(22,39),2); // bit 22 .. 38
         cprLongtitude = Integer.parseInt(payload_binary.substring(39),2); // bit 39 ..55
+
+        if (Integer.parseInt(payload_binary.substring(15,16),2) == 1)
+            altitude = (altitude - 1000) * 25;
+        else
+            altitude = (altitude-1000) * 100;
     }
 
     @Override
