@@ -1,7 +1,7 @@
 package acamo;
 
 import javax.swing.*;
-import java.awt.*;
+
 import messer.*;
 
 /**
@@ -9,34 +9,34 @@ import messer.*;
  */
 public class Gui extends JFrame {
     private JTabbedPane tp = new JTabbedPane();
-    private JTextArea positionMessage = new JTextArea(65,70);
-    private JTextArea velocityMessage = new JTextArea(65,70);
-    private JTextArea identificationMessage = new JTextArea(65,70);
-    private JTextArea otherMessage = new JTextArea(65,70);
+    private JTextArea textAreaPositionMessage = new JTextArea(65,70);
+    private JTextArea textAreaVelocityMessage = new JTextArea(65,70);
+    private JTextArea textAreaIdentificationMessage = new JTextArea(65,70);
+    private JTextArea textAreaOtherMessage = new JTextArea(65,70);
     public Gui(){
         super("ADSB-Control-Panel");
         setSize(1200,750);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(tp);
-        tp.add(new JScrollPane(positionMessage), "POSITIONMESSAGE");
-        tp.add(new JScrollPane(velocityMessage), "VELOCITYMESSAGE");
-        tp.add(new JScrollPane(identificationMessage), "ID-MESSAGE");
-        tp.add(new JScrollPane(otherMessage), "OTHER");
+        tp.add(new JScrollPane(textAreaPositionMessage), "POSITIONMESSAGE");
+        tp.add(new JScrollPane(textAreaVelocityMessage), "VELOCITYMESSAGE");
+        tp.add(new JScrollPane(textAreaIdentificationMessage), "ID-MESSAGE");
+        tp.add(new JScrollPane(textAreaOtherMessage), "OTHER");
     }
 
     public void selectMessage(ADSBMessage message){
         if (message instanceof ADSBAirbonePositionMessage){
-            positionMessage.append(message.toString());
+            textAreaPositionMessage.append(message.toString());
         }
         else if (message instanceof ADSBAirboneVelocityMessage){
-            velocityMessage.append(message.toString());
+            textAreaVelocityMessage.append(message.toString());
         }
         else if (message instanceof ADSBAircraftIdentificationMessage){
-            identificationMessage.append(message.toString());
+            textAreaIdentificationMessage.append(message.toString());
         }
         else {
-            otherMessage.append(message.toString());
+            textAreaOtherMessage.append(message.toString());
         }
 
 
