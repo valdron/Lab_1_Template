@@ -5,6 +5,7 @@ import messer.ADSBAirboneVelocityMessage;
 import messer.ADSBAircraftIdentificationMessage;
 import messer.ADSBMessage;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,11 +26,16 @@ public class ActiveAircrafts{
                 while (true) {
 
                     synchronized (timeMap){
+                        ArrayList<String> deletkeys = new ArrayList<String>();
                         for(String key: timeMap.keySet()){
                             Calendar resetTime = timeMap.get(key);
-                            if (resetTime.after(Calendar.getInstance())) {
-                                deleteActive(key);
+                            if (resetTime.before(Calendar.getInstance())) {
+                                deletkeys.add(key);
                             }
+                        }
+
+                        for(String key: deletkeys) {
+                            deleteActive(key);
                         }
                     }
 
