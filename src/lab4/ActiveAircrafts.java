@@ -26,16 +26,20 @@ public class ActiveAircrafts{
                 while (true) {
 
                     synchronized (timeMap){
+                        //System.out.print("------------------" + timeMap.size() + "-----------------");
                         ArrayList<String> deletkeys = new ArrayList<String>();
+                        //System.out.println("STAAAAAAAAAAAAART Cecking");
                         for(String key: timeMap.keySet()){
                             Calendar resetTime = timeMap.get(key);
                             if (resetTime.before(Calendar.getInstance())) {
                                 deletkeys.add(key);
+                                //System.out.println("Zwischensave für Delete SPÄÄÄÄÄTER = "+ key);
                             }
                         }
 
                         for(String key: deletkeys) {
                             deleteActive(key);
+                            //System.out.println("DEEEEEEEEEEEELETE = "+ key);
                         }
                     }
 
@@ -77,12 +81,13 @@ public class ActiveAircrafts{
             //write back in map
             dataMap.put(key, data);
             updateTimer(key);
+            //System.out.println("UPDATE HIIIIIIIER ="+ key);
         }
     }
 
     private void updateTimer(String key) {
         Calendar start = Calendar.getInstance();
-        start.add(start.MINUTE, 4);
+        start.add(start.SECOND, 10);
         timeMap.put(key,start);
     }
 
