@@ -46,10 +46,12 @@ public class ADSBMessageFactory implements ADSBMessageFactoryInterface {
         String result = "";
         for(int i = 0; i < str.length();i+=6) {
             int charvalue;
+
             if(i+6 >= str.length())
                 charvalue = Integer.parseInt(str.substring(i),2);
             else
                 charvalue = Integer.parseInt(str.substring(i,i+6),2);
+
             if(charvalue < 32)
                 charvalue += 64;
             result += (char) charvalue;

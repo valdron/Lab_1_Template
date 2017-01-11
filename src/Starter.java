@@ -1,3 +1,4 @@
+import WebServer.WebServer;
 import client.Client;
 import senser.Senser;
 import acamo.*;
@@ -24,5 +25,12 @@ public class Starter
 
 		client.start();
 		new Thread(server).start();
+		try {
+			WebServer.startServer();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("Got through");
 	}
 }
