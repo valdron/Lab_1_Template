@@ -4,6 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import acamo.Gui;
+import lab4.ActiveAircrafts;
 import messer.ADSBMessage;
 import messer.ADSBMessageFactory;
 import senser.ADSBSentence;
@@ -28,14 +29,18 @@ public class Client extends Thread implements Observer
 
 	public void run()
 	{ 
-		ADSBMessageDisplay messageDisplay = new ADSBMessageDisplay();
+		//ADSBMessageDisplay messageDisplay = new ADSBMessageDisplay();
 		ADSBMessageFactory messageFactory = new ADSBMessageFactory();
-		Gui gui = new Gui();
+		ActiveAircrafts active = new ActiveAircrafts();
+		//Gui gui = new Gui();
 		while(true)
 		{
 			ADSBMessage message = messageFactory.fromADSBSentence(queue.poll());
-			messageDisplay.display(message);
-			gui.selectMessage(message);
+
+			//messageDisplay.display(message);
+			//gui.selectMessage(message);
+
+			active.updateActive(message);
 		}
 	}
 }
