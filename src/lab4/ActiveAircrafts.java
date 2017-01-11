@@ -4,6 +4,7 @@ import messer.ADSBAirbonePositionMessage;
 import messer.ADSBAirboneVelocityMessage;
 import messer.ADSBAircraftIdentificationMessage;
 import messer.ADSBMessage;
+import redis.clients.jedis.Jedis;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,7 +23,7 @@ public class ActiveAircrafts{
             @Override
             public void run() {
 
-
+                Jedis jed = new Jedis("localhost");
                 while (true) {
 
                     synchronized (timeMap){
@@ -42,6 +43,18 @@ public class ActiveAircrafts{
                             //System.out.println("DEEEEEEEEEEEELETE = "+ key);
                         }
                     }
+
+                    //Write KML-String
+                    String kml = "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n" +
+                            "<Document>";
+                    for(String key: dataMap.keySet()) {
+                        kml = kml + dataMap.get(key).toKml();
+                    }
+                    kml = kml + "</Document>\n" +
+                            "</kml>";
+
+                    jed.set("kmlDataString",kml);
+
 
                     try {
                         Thread.sleep(500);
@@ -69,7 +82,16 @@ public class ActiveAircrafts{
 
             //update data object
             if (message instanceof ADSBAirbonePositionMessage) {
-                data.positionMessage = (ADSBAirbonePositionMessage) message;
+
+                if( ((ADSBAirbonePositionMessage) message).getCprFormat() == 0 ) {
+                    data.positionMessageEven = (ADSBAirbonePositionMessage) message;
+                    data.lastEvenorOdd = 0;
+                }
+                else{
+                    data.positionMessageOdd = (ADSBAirbonePositionMessage) message;
+                    data.lastEvenorOdd = 1;
+                }
+
             } else if (message instanceof ADSBAirboneVelocityMessage) {
                 data.velocityMessage = (ADSBAirboneVelocityMessage) message;
             } else if (message instanceof ADSBAircraftIdentificationMessage) {
