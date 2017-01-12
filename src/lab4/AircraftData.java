@@ -48,7 +48,7 @@ public class AircraftData {
                 "</description>\n" +
                 "<styleUrl>#" + positionMessageOdd.getIcao() + "</styleUrl>\n" +
                 "<Point>\n" +
-                    "<coordinates>" + lat + "," + lon +" ," + positionMessageEven.getAltitude() +"</coordinates>\n" +
+                    "<coordinates>" + lon + "," + lat +" ," + positionMessageEven.getAltitude() +"</coordinates>\n" +
                 "<altitudeMode>relativeToGround</altitudeMode>\n" +
                 "<extrude>1</extrude>\n" +
                 "</Point>\n" +
@@ -94,9 +94,9 @@ public class AircraftData {
 
 
         if(lastEvenorOdd == 0)
-            return rlat0/2;
+            return rlat0;
         else
-            return rlat1/2;
+            return rlat1;
     }
 
     private static double dlat(int evenodd) {
