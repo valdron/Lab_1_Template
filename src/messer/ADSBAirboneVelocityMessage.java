@@ -44,14 +44,18 @@ public class ADSBAirboneVelocityMessage extends ADSBMessage implements ADSBAirbo
             //  compute speed with pythagoras +1 to match other coding
             speed = (int) Math.sqrt(east_west_speed_nr * east_west_speed_nr + north_south_speed_nr * north_south_speed_nr) + 1;
 
+
+
             double heading_radians= Math.atan(((double) east_west_speed_nr)/north_south_speed_nr);
 
             int east_or_west = Integer.parseInt(payload_binary.substring(13,14),2);
-            if(east_or_west == 1 && north_south_speed_nr == 1)
+            int north_or_south = Integer.parseInt(payload_binary.substring(24,25),2);
+
+            if(east_or_west == 1 && north_or_south == 1)
                 heading = (int) (Math.toDegrees(heading_radians + Math.PI));
-            else if(east_or_west == 0 && north_south_speed_nr == 1)
+            else if(east_or_west == 0 && north_or_south == 1)
                 heading = (int) (Math.toDegrees(Math.PI - heading_radians));
-            else if (east_or_west == 1 && north_south_speed_nr == 0)
+            else if (east_or_west == 1 && north_or_south == 0)
                 heading = (int) (Math.toDegrees(2 * Math.PI - heading_radians));
             else
                 heading = (int) Math.toDegrees(heading_radians);

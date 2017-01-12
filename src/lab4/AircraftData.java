@@ -29,7 +29,16 @@ public class AircraftData {
             return "";
         }
 
+        int icon_nr = velocityMessage.getHeading() / 15;
+        String icon = "";
+        if (icon_nr < 10)
+            icon += "0" + icon_nr;
+        else
+            icon += icon_nr;
+
+
         double lon = decodeCprLongtitude(lat);
+
 
 
         return  "<Style id=\"" + positionMessageOdd.getIcao() + "\">\n" +
@@ -37,7 +46,7 @@ public class AircraftData {
                 "<scale>0.7</scale>\n" +
                 "<heading>" + velocityMessage.getHeading() + "</heading>\n" +
                 "<Icon>\n" +
-                "<href>http://localhost:3333/icons/plane09.png</href>\n" + //TODO: calc out of heading which planeicon to use
+                "<href>http://localhost:3333/icons/plane" + icon +".png</href>\n" + //TODO: calc out of heading which planeicon to use
                 "</Icon>\n" +
                 "</IconStyle>\n" +
                 "</Style>\n" +
