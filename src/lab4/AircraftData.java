@@ -64,7 +64,13 @@ public class AircraftData {
         int m = (int) Math.floor(( (double) ( (nl-1) * lon0 - nl * lon1) / 131072.0 ) +0.5);
 
         double rlon0 = dlon(0, nl) * (mod(m,nl       ) + (double) lon0/131072.0);
-        double rlon1 = dlon(1, nl) * (mod(m,nl - 1) + (double) lon0/131072.0);
+        double rlon1 = dlon(1, nl) * (mod(m,nl - 1) + (double) lon1/131072.0);
+
+        if (rlon0 >= 180)
+            rlon0 -= 360;
+        if (rlon1 >= 180)
+            rlon1 -= 360;
+
 
         if(lastEvenorOdd == 0)
             return rlon0;

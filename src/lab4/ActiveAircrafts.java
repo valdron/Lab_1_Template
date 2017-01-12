@@ -109,7 +109,7 @@ public class ActiveAircrafts{
 
     private void updateTimer(String key) {
         Calendar start = Calendar.getInstance();
-        start.add(start.SECOND, 10);
+        start.add(start.MINUTE, 4);
         timeMap.put(key,start);
     }
 
