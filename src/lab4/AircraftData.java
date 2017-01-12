@@ -78,7 +78,7 @@ public class AircraftData {
             return rlon1;
     }
 
-    private double decodeCprLatitude() throws Exception {
+    public double decodeCprLatitude() throws Exception {
 
         int lat0 = positionMessageEven.getCprLatitude();
         int lat1 = positionMessageOdd.getCprLatitude();
@@ -94,9 +94,9 @@ public class AircraftData {
 
 
         if(lastEvenorOdd == 0)
-            return rlat0;
+            return rlat0/2;
         else
-            return rlat1;
+            return rlat1/2;
     }
 
     private static double dlat(int evenodd) {

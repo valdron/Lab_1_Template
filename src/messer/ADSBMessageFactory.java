@@ -15,6 +15,7 @@ public class ADSBMessageFactory implements ADSBMessageFactoryInterface {
         System.out.println(binaryPayload);
         System.out.println("type:" + binaryPayload.substring(0,5));
         System.out.println("subtype: " + binaryPayload.substring(5,8));
+
         String type = binaryPayload.substring(0,5);
         String sub_type = binaryPayload.substring(5,8);
         String df = binaryDfca.substring(0,5);
