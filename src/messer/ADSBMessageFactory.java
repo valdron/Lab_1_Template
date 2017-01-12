@@ -8,10 +8,18 @@ public class ADSBMessageFactory implements ADSBMessageFactoryInterface {
     @Override
     public ADSBMessage fromADSBSentence(ADSBSentence sentence) {
 
-        String type = hexToBinaryString(sentence.getPayload()).substring(0,5);
-        String sub_type = hexToBinaryString(sentence.getPayload()).substring(5,8);
-        String df = hexToBinaryString(sentence.getDfca()).substring(0,5);
-        String ca = hexToBinaryString(sentence.getDfca()).substring(5,8);
+
+        String binaryPayload = hexToBinaryString(sentence.getPayload());
+        String binaryDfca = hexToBinaryString(sentence.getDfca());
+
+        System.out.println(binaryPayload);
+        System.out.println("type:" + binaryPayload.substring(0,5));
+        System.out.println("subtype: " + binaryPayload.substring(5,8));
+        String type = binaryPayload.substring(0,5);
+        String sub_type = binaryPayload.substring(5,8);
+        String df = binaryDfca.substring(0,5);
+        String ca = binaryDfca.substring(5,8);
+
         int type_int = Integer.parseInt(type,2);
         int df_int = Integer.parseInt(df,2);
         int ca_int = Integer.parseInt(ca,2);

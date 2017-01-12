@@ -70,6 +70,32 @@ public class WebServer {
                 response = kmlData;
             }
 
+            /*response = "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n" +
+                    "<Document>\n" +
+                    "<Style id=\"40612C\">\n" +
+                    "<IconStyle>\n" +
+                    "<scale>0.7</scale>\n" +
+                    "<heading>137</heading>\n" +
+                    "<Icon>\n" +
+                    "<href>http://localhost:3333/icons/plane09.png</href>\n" +
+                    "</Icon>\n" +
+                    "</IconStyle>\n" +
+                    "</Style>\n" +
+                    "<Placemark>\n" +
+                    "<name>40612C</name>\n" +
+                    "<description>\n" +
+                    "EZY19PE Lon: 9.645923815275493 Lat: 49.78056335449219 Alt: 11292m Dir: 137deg Vel: 483kn Clm: 0ft/min\n" +
+                    "</description>\n" +
+                    "<styleUrl>#40612C</styleUrl>\n" +
+                    "<Point>\n" +
+                    "<coordinates>9.64592382, 49.78056335, 11292</coordinates>\n" +
+                    "<altitudeMode>relativeToGround</altitudeMode>\n" +
+                    "<extrude>1</extrude>\n" +
+                    "</Point>\n" +
+                    "</Placemark>\n" +
+                    "</Document>\n" +
+                    "</kml>";*/
+
             t.sendResponseHeaders(200, response.length());
             OutputStream os = t.getResponseBody();
             os.write(response.getBytes());

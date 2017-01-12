@@ -18,7 +18,7 @@ public class Client extends Thread implements Observer
 	
 	public Client()
 	{
-		this.queue = new Queue<ADSBSentence>();
+		this.queue = new Queue<>();
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class Client extends Thread implements Observer
 
 	public void run()
 	{ 
-		//ADSBMessageDisplay messageDisplay = new ADSBMessageDisplay();
+		ADSBMessageDisplay messageDisplay = new ADSBMessageDisplay();
 		ADSBMessageFactory messageFactory = new ADSBMessageFactory();
 		ActiveAircrafts active = new ActiveAircrafts();
 		//Gui gui = new Gui();
@@ -37,7 +37,7 @@ public class Client extends Thread implements Observer
 		{
 			ADSBMessage message = messageFactory.fromADSBSentence(queue.poll());
 
-			//messageDisplay.display(message);
+			messageDisplay.display(message);
 			//gui.selectMessage(message);
 
 			active.updateActive(message);

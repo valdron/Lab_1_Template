@@ -27,9 +27,9 @@ public class ADSBAirbonePositionMessage extends ADSBMessage implements ADSBAirbo
         cprLongtitude = Integer.parseInt(payload_binary.substring(39),2); // bit 39 ..55
 
         if (Integer.parseInt(payload_binary.substring(15,16),2) == 1)
-            altitude = (altitude - 1000) * 25;
+            altitude = - 1000 + altitude  * 25;
         else
-            altitude = (altitude-1000) * 100;
+            altitude = -1000 + altitude * 100;
     }
 
     @Override

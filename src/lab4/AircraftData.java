@@ -16,12 +16,19 @@ public class AircraftData {
     public ADSBAircraftIdentificationMessage identificationMessage;
     public ADSBMessage otherMessage;
 
-
+    // create kml String of Object
     public String toKml() {
+        //check if enough messages came in
         if( positionMessageOdd == null || positionMessageEven == null || velocityMessage == null)
             return "";
 
-        double lat = decodeCprLatitude();
+        double lat ;
+        try {
+            lat = decodeCprLatitude();
+        } catch (Exception e) {
+            return "";
+        }
+
         double lon = decodeCprLongtitude(lat);
 
 
@@ -30,7 +37,7 @@ public class AircraftData {
                 "<scale>0.7</scale>\n" +
                 "<heading>" + velocityMessage.getHeading() + "</heading>\n" +
                 "<Icon>\n" +
-                "<href>http://localhost:3333/icons/plane09.png</href>\n" + //TODO
+                "<href>http://localhost:3333/icons/plane09.png</href>\n" + //TODO: calc out of heading which planeicon to use
                 "</Icon>\n" +
                 "</IconStyle>\n" +
                 "</Style>\n" +
@@ -41,7 +48,7 @@ public class AircraftData {
                 "</description>\n" +
                 "<styleUrl>#" + positionMessageOdd.getIcao() + "</styleUrl>\n" +
                 "<Point>\n" +
-                    "<coordinates>" + lat + "," + lon+" ," + positionMessageEven.getAltitude() +"</coordinates>\n" +
+                    "<coordinates>" + lat + "," + lon +" ," + positionMessageEven.getAltitude() +"</coordinates>\n" +
                 "<altitudeMode>relativeToGround</altitudeMode>\n" +
                 "<extrude>1</extrude>\n" +
                 "</Point>\n" +
@@ -54,10 +61,10 @@ public class AircraftData {
 
         int nl = nlLookup(lat);
 
-        int m = (int) ((((nl-1) * lon0 - nl * lon1)/131072) +0.5);
+        int m = (int) Math.floor(( (double) ( (nl-1) * lon0 - nl * lon1) / 131072.0 ) +0.5);
 
-        double rlon0 = (360/Math.max(nl-0,1)) * (mod(m,nl-0)+lon0/131072);
-        double rlon1 = (360/Math.max(nl-0,1)) * (mod(m,nl-0)+lon0/131072);
+        double rlon0 = dlon(0, nl) * (mod(m,nl       ) + (double) lon0/131072.0);
+        double rlon1 = dlon(1, nl) * (mod(m,nl - 1) + (double) lon0/131072.0);
 
         if(lastEvenorOdd == 0)
             return rlon0;
@@ -65,17 +72,33 @@ public class AircraftData {
             return rlon1;
     }
 
-    public double decodeCprLatitude() {
+    private double decodeCprLatitude() throws Exception {
+
         int lat0 = positionMessageEven.getCprLatitude();
         int lat1 = positionMessageOdd.getCprLatitude();
-        int j = (int) ((59 * lat0 - 60 * lat1 / 131072) + 0.5);
-        double rlat1 = (360/(4*15 - 1)) * (mod(j, 60 - lastEvenorOdd) + lat1/131072);
-        double rlat0 = (360/(4*15 - 1)) * (mod(j, 60 - lastEvenorOdd) + lat0/131072);
+
+        int j = (int ) Math.floor(( (double) (59 * lat0 - 60 * lat1) / 131072.0) + 0.5);
+        double rlat1 = dlat(1) * (mod(j, 60 - 1) + (double) lat1/131072.0);
+        double rlat0 = dlat(0) * (mod(j, 60    ) + (double) lat0/131072.0);
+
+        if (nlLookup(rlat0) != nlLookup(rlat1)){
+            System.out.println("nl not equal");
+            throw new Exception("nl not equal");
+        }
+
 
         if(lastEvenorOdd == 0)
             return rlat0;
         else
             return rlat1;
+    }
+
+    private static double dlat(int evenodd) {
+        return 360.0/(4 * 15 - evenodd);
+    }
+
+    private static double dlon(int evenodd, int nl) {
+        return 360.0/(Math.max(nl - evenodd, 1));
     }
 
     private static int mod(int x, int y) {

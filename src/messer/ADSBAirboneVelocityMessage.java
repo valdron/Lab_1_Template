@@ -48,13 +48,13 @@ public class ADSBAirboneVelocityMessage extends ADSBMessage implements ADSBAirbo
 
             int east_or_west = Integer.parseInt(payload_binary.substring(13,14),2);
             if(east_or_west == 1 && north_south_speed_nr == 1)
-                heading = (int) (Math.toDegrees(heading_radians + Math.PI)* 360 / 1024);
+                heading = (int) (Math.toDegrees(heading_radians + Math.PI));
             else if(east_or_west == 0 && north_south_speed_nr == 1)
-                heading = (int) (Math.toDegrees(Math.PI - heading_radians) * 360 / 1024);
+                heading = (int) (Math.toDegrees(Math.PI - heading_radians));
             else if (east_or_west == 1 && north_south_speed_nr == 0)
-                heading = (int) (Math.toDegrees(2 * Math.PI - heading_radians) * 360 / 1024);
+                heading = (int) (Math.toDegrees(2 * Math.PI - heading_radians));
             else
-                heading = (int) Math.toDegrees(heading_radians) * 360 / 1024;
+                heading = (int) Math.toDegrees(heading_radians);
 
         } else { // with heading 0 = 0° (north) 1 = 360/1024 ° ... 1023 * 360 / 1024
 
@@ -62,7 +62,7 @@ public class ADSBAirboneVelocityMessage extends ADSBMessage implements ADSBAirbo
             
             //check if heading data is available
             if(heading_status_bit == 1){
-                heading = Integer.parseInt(payload_binary.substring(14,24),2);
+                heading = (int) ( (double) Integer.parseInt(payload_binary.substring(14,24),2) / 360.0 * 1024.0);
             }
             speed = Integer.parseInt(payload_binary.substring(25,35),2);
         }
