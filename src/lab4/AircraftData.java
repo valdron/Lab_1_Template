@@ -101,6 +101,11 @@ public class AircraftData {
             throw new Exception("nl not equal");
         }
 
+        if (rlat1 < 0)
+            rlat1 += 360;
+
+        if (rlat0 < 0)
+            rlat0 += 360;
 
         if(lastEvenorOdd == 0)
             return rlat0;
